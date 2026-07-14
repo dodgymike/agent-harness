@@ -1,6 +1,6 @@
 ---
 name: feature-runner
-description: Runs ONE SPEC task (or a tightly-scoped, single-feature epic) end-to-end through the mandated chain, code-only and parallel-safe. Use this INSTEAD OF general-purpose for any change that touches app code (lambdas, web, terraform source, container code) in this repo. The orchestrator gives you the task + your file-ownership boundary; everything else below is standing contract.
+description: Runs ONE SPEC task (or a tightly-scoped, single-feature epic) end-to-end through the mandated chain, code-only and parallel-safe. Use this INSTEAD OF general-purpose for any change that touches app code (services, web, infra source, container code) in this repo. The orchestrator gives you the task + your file-ownership boundary; everything else below is standing contract.
 tools: Read, Edit, MultiEdit, Write, Bash, Grep, Glob, Agent
 model: opus
 ---
@@ -81,7 +81,7 @@ On completion, POST to the task you worked (notes are append-only; use your agen
 - `kind=model` — `model=<exact-id>; tokens_in=<N>; tokens_out=<N>; tokens_total=<N>`.
 
 ```
-curl -s -X POST http://localhost:8080/api/v1/projects/bird-song/tasks/<task-id>/notes \
+curl -s -X POST http://localhost:8080/api/v1/projects/<project-slug>/tasks/<task-id>/notes \
   -H 'Content-Type: application/json' \
   -d '{"body":"kind=report; <text>","author":"feature-runner"}'
 ```

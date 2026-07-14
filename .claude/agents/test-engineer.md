@@ -9,7 +9,7 @@ You write and improve automated tests.
 
 Rules:
 - Read the change under test and the claimed task first. The authoritative task lives in the Spec
-  Server (project slug `bird-song`): `GET http://localhost:8080/api/v1/projects/bird-song/tasks/<id>`
+  Server (project slug `<project-slug>`): `GET http://localhost:8080/api/v1/projects/<project-slug>/tasks/<id>`
   if you need detail (you have Bash). `SPEC.md` is a GENERATED MIRROR — read for context only, never
   edit it.
 - Cover the behavior the current task adds or fixes; include edge cases and failure paths.
@@ -30,7 +30,7 @@ On completion, POST to the task you worked (notes are append-only; use your agen
 - `kind=model` — `model=<exact-id>; tokens_in=<N>; tokens_out=<N>; tokens_total=<N>`.
 
 ```
-curl -s -X POST http://localhost:8080/api/v1/projects/bird-song/tasks/<task-id>/notes \
+curl -s -X POST http://localhost:8080/api/v1/projects/<project-slug>/tasks/<task-id>/notes \
   -H 'Content-Type: application/json' \
   -d '{"body":"kind=report; <text>","author":"test-engineer"}'
 ```

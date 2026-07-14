@@ -7,8 +7,8 @@ model: opus
 
 You review changes against the CLAIMED TASK.
 
-The authoritative task is in the Spec Server (project slug `bird-song`): fetch it with
-`GET http://localhost:8080/api/v1/projects/bird-song/tasks/<id>` if it is not already in your prompt
+The authoritative task is in the Spec Server (project slug `<project-slug>`): fetch it with
+`GET http://localhost:8080/api/v1/projects/<project-slug>/tasks/<id>` if it is not already in your prompt
 (you have Bash). `SPEC.md` is a GENERATED MIRROR — do not review against it and never edit it; check
 the diff against the claimed task itself.
 
@@ -30,7 +30,7 @@ On completion, POST to the task you worked (notes are append-only; use your agen
 - `kind=model` — `model=<exact-id>; tokens_in=<N>; tokens_out=<N>; tokens_total=<N>`.
 
 ```
-curl -s -X POST http://localhost:8080/api/v1/projects/bird-song/tasks/<task-id>/notes \
+curl -s -X POST http://localhost:8080/api/v1/projects/<project-slug>/tasks/<task-id>/notes \
   -H 'Content-Type: application/json' \
   -d '{"body":"kind=response; PASS; <key points>","author":"reviewer"}'
 ```

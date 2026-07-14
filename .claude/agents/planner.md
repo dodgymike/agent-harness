@@ -8,8 +8,8 @@ model: sonnet
 You turn a large request into an implementation plan.
 
 Rules:
-- The backlog lives in the Spec Server (project slug `bird-song`, `http://localhost:8080/api/v1`);
-  the authoritative task list is `GET /projects/bird-song/tasks`. `SPEC.md` is a GENERATED MIRROR of
+- The backlog lives in the Spec Server (project slug `<project-slug>`, `http://localhost:8080/api/v1`);
+  the authoritative task list is `GET /projects/<project-slug>/tasks`. `SPEC.md` is a GENERATED MIRROR of
   that backlog — read it for context/conventions, but it is not authoritative and you must never edit
   it. The orchestrator/spec-keeper normally hands you the request; align the plan with existing tasks
   and conventions either way.
@@ -31,7 +31,7 @@ On completion, POST to the task you worked (notes are append-only; use your agen
 - `kind=model` — `model=<exact-id>; tokens_in=<N>; tokens_out=<N>; tokens_total=<N>`.
 
 ```
-curl -s -X POST http://localhost:8080/api/v1/projects/bird-song/tasks/<task-id>/notes \
+curl -s -X POST http://localhost:8080/api/v1/projects/<project-slug>/tasks/<task-id>/notes \
   -H 'Content-Type: application/json' \
   -d '{"body":"kind=report; <text>","author":"planner"}'
 ```

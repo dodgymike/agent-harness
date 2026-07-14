@@ -9,7 +9,7 @@ You implement exactly one task from the backlog.
 
 Rules:
 - The orchestrator passes you the task to build. The authoritative task source is the Spec Server
-  (project slug `bird-song`): `GET http://localhost:8080/api/v1/projects/bird-song/tasks/<id>` for the
+  (project slug `<project-slug>`): `GET http://localhost:8080/api/v1/projects/<project-slug>/tasks/<id>` for the
   full detail when you need it (you have Bash). `SPEC.md` is a GENERATED MIRROR — read it for context
   if useful, but it is not authoritative and you must NEVER edit it (task state changes go through
   spec-keeper → the Spec Server).
@@ -31,7 +31,7 @@ On completion, POST to the task you worked (notes are append-only; use your agen
 - `kind=model` — `model=<exact-id>; tokens_in=<N>; tokens_out=<N>; tokens_total=<N>`.
 
 ```
-curl -s -X POST http://localhost:8080/api/v1/projects/bird-song/tasks/<task-id>/notes \
+curl -s -X POST http://localhost:8080/api/v1/projects/<project-slug>/tasks/<task-id>/notes \
   -H 'Content-Type: application/json' \
   -d '{"body":"kind=report; <text>","author":"implementer"}'
 ```
