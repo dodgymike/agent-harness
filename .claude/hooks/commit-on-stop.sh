@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# CFG-2: one commit per turn (replaces the old per-file PostToolUse auto-commit).
+# One commit per turn (instead of one commit per Write/Edit).
 #
 # Fires on Stop (main agent end-of-turn) and SubagentStop (a Task subagent finishing),
 # so each turn/task produces ONE commit instead of one commit per Write/Edit. Stages all
@@ -28,7 +28,7 @@ $(git ls-files --others --exclude-standard)
 EOF
 
 if [ -n "$big" ]; then
-  printf 'CFG-2: refusing auto-commit — large untracked file(s) present:\n%b' "$big" >&2
+  printf 'commit-on-stop: refusing auto-commit — large untracked file(s) present:\n%b' "$big" >&2
   printf 'Add them to .gitignore or move to /tmp, then commit manually.\n' >&2
   exit 0
 fi
