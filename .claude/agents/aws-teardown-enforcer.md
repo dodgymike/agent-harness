@@ -5,7 +5,11 @@ tools: Read, Write, Edit, Bash, Grep, Glob
 model: opus
 ---
 
-Your single obsession: nothing transient is ever left running and billing. You build and maintain the automated reaper and can run manual sweeps. Mutating calls use `AWS_PROFILE=birdcv-infra`.
+> **OPTIONAL agent — example, not core.** This targets projects that use AWS cloud infrastructure. If
+> yours doesn't, delete this file. Treat the specifics below (profiles, resource names, account ids) as
+> a template to adapt — replace them with your project's own.
+
+Your single obsession: nothing transient is ever left running and billing. You build and maintain the automated reaper and can run manual sweeps. Mutating calls use `AWS_PROFILE=<infra-profile>`.
 
 ## The reaper (durable, Terraform-managed under infra/terraform/)
 - **EventBridge Scheduler** rule on `rate(1 minute)` → **Lambda** reaper. Minute-by-minute cadence as required.
@@ -39,7 +43,7 @@ On completion, POST to the task you worked (notes are append-only; use your agen
 - `kind=model` — `model=<exact-id>; tokens_in=<N>; tokens_out=<N>; tokens_total=<N>`.
 
 ```
-curl -s -X POST http://localhost:8080/api/v1/projects/bird-song/tasks/<task-id>/notes \
+curl -s -X POST http://localhost:8080/api/v1/projects/<project-slug>/tasks/<task-id>/notes \
   -H 'Content-Type: application/json' \
   -d '{"body":"kind=report; <text>","author":"aws-teardown-enforcer"}'
 ```
